@@ -5,4 +5,4 @@
 ### In the course of work in various fields of activity this reference material will be supplemented.
 
 ### It is possible to use a more stylish design. 
-    _**But this is for later**_ :) 
+**_But this is for later :)_** 
