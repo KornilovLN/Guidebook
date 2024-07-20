@@ -1,7 +1,7 @@
 #!/bin/bash
 
-NIKNAME="KornilovLN"
-TOKEN_FILE=~/virt/token/tok.txt
+NIKNAME="K*********N"
+TOKEN_FILE=~/path/to/token/tok.txt
 
 # Проверка наличия файла с токеном
 if [ ! -f "$TOKEN_FILE" ]; then
@@ -41,8 +41,6 @@ fi
 
 # Git push
 if confirm "Выполнить git push?"; then
-    #git push
-    #read -p "Введите имя пользователя GitHub ($NIKNAME): " github_username
     github_username=${github_username:-$NIKNAME}
     token=$(cat "$TOKEN_FILE")
     echo "Используется токен из файла $TOKEN_FILE"
