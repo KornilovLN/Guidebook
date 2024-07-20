@@ -41,8 +41,8 @@ fi
 
 # Git push
 if confirm "Выполнить git push?"; then
-    git push
-    read -p "Введите имя пользователя GitHub ($NIKNAME): " github_username
+    #git push
+    #read -p "Введите имя пользователя GitHub ($NIKNAME): " github_username
     github_username=${github_username:-$NIKNAME}
     token=$(cat "$TOKEN_FILE")
     echo "Используется токен из файла $TOKEN_FILE"
