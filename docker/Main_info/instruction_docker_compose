@@ -1,0 +1,150 @@
+#---------------------------------------------------------
+#--- Инструкция по docker compose:
+#--- https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
+#---------------------------------------------------------
+
+#--- <<< STEP 1 Установить docker composer >>>
+
+#--- Загрузка последней версии Docker Compose:
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+#--- Присвоение исполняемых прав:
+sudo chmod +x /usr/local/bin/docker-compose
+
+#--- Проверка установки:
+docker-compose --version
+
+output:
+Docker Compose version v2.27.1
+
+
+#--- <<< STEP 2 Создать тестовый проект >>>
+
+mkdir ./compose-demo
+
+cd compose-demo
+
+mkdir app
+
+#---  в редакторе пишем свой html
+nano app/index.html
+
+```
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Docker Compose Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.min.css">
+</head>
+<body>
+
+    <h1>This is a Docker Compose Demo Page.</h1>
+    <p>This content is being served by an Nginx container.</p>
+
+</body>
+</html>
+```
+
+#--- также создаем yaml для докер-композера
+nano docker-compose.yml
+
+```
+version: '3.7'
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - ./app:/usr/share/nginx/html
+```
+
+
+#--- <<< STEP 3 Запускаем docker-compose >>>
+docker-compose up -d
+
+Output:
+Creating network "compose-demo_default" with the default driver
+Pulling web (nginx:alpine)...
+alpine: Pulling from library/nginx
+cbdbe7a5bc2a: Pull complete
+10c113fb0c77: Pull complete
+9ba64393807b: Pull complete
+c829a9c40ab2: Pull complete
+61d685417b2f: Pull complete
+Digest: sha256:57254039c6313fe8c53f1acbf15657ec9616a813397b74b063e32443427c5502
+Status: Downloaded newer image for nginx:alpine
+Creating compose-demo_web_1 ... done
+
+#--- можно посмотреть запущенные докеры
+docker-compose ps
+
+Output:
+WARN[0000] /home/leon/work/docker/docker_compose/compose-demo/docker-compose.yml: `version` is obsolete 
+NAME                 IMAGE          COMMAND                  SERVICE   CREATED          STATUS          PORTS
+compose-demo-web-1   nginx:alpine   "/docker-entrypoint.…"   web       19 minutes ago   Up 12 minutes   0.0.0.0:8000->80/tcp, :::8000->80/tcp
+
+#--- Будет запущен сервер. Смотреть в localhost:8000
+
+
+#--- <<< STEP 4 Знакомство с командами Docker Compose >>>
+
+#--- Посмотреть логи
+docker-compose logs
+
+Output:
+Output
+Attaching to compose-demo_web_1
+web_1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+web_1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+web_1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+web_1  | 10-listen-on-ipv6-by-default.sh: Getting the checksum of /etc/nginx/conf.d/default.conf
+web_1  | 10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+web_1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+web_1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+web_1  | 172.22.0.1 - - [02/Jun/2020:10:47:13 +0000] "GET / HTTP/1.1" 200 353 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36" "-"
+
+#--- Поставить докер на паузу:
+docker-compose pause
+
+Output:
+Pausing compose-demo_web_1 ... done
+
+#--- снять с паузы:
+docker-compose unpause
+
+Output:
+Unpausing compose-demo_web_1 ... done
+
+#--- Остановить, но не удалять контейнер:
+docker-compose stop
+
+Output:
+Stopping compose-demo_web_1 ... done
+
+#--- Удалить контейнер вместе с прикрепленными томами:
+docker-compose down
+
+Output:
+Removing compose-demo_web_1 ... done
+Removing network compose-demo_default
+
+Notice that this won’t remove the base image used by Docker Compose to spin up your environment (in your case, nginx:alpine). This way, whenever you bring your environment up again with a docker-compose up, the process will be much faster since the image is already on your system.
+
+#--- Если надо удалить базовый имидж:
+docker image rm nginx:alpine
+
+Output:
+Untagged: nginx:alpine
+Untagged: nginx@sha256:b89a6ccbda39576ad23fd079978c967cecc6b170db6e7ff8a769bf2259a71912
+Deleted: sha256:7d0cdcc60a96a5124763fddf5d534d058ad7d0d8d4c3b8be2aefedf4267d0270
+Deleted: sha256:05a0eaca15d731e0029a7604ef54f0dda3b736d4e987e6ac87b91ac7aac03ab1
+Deleted: sha256:c6bbc4bdac396583641cb44cd35126b2c195be8fe1ac5e6c577c14752bbe9157
+Deleted: sha256:35789b1e1a362b0da8392ca7d5759ef08b9a6b7141cc1521570f984dc7905eb6
+Deleted: sha256:a3efaa65ec344c882fe5d543a392a54c4ceacd1efd91662d06964211b1be4c08
+Deleted: sha256:3e207b409db364b595ba862cdc12be96dcdad8e36c59a03b7b3b61c946a5741a
+
+
+
+

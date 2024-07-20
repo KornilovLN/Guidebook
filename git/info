@@ -1,0 +1,51 @@
+https://docs.github.com/ru/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github
+
+starmark@starmark-small:~/VSCode_prj/ports/thrd$ git config --list
+user.name=starmark
+user.email=ln.starmark@gmail.com
+core.editor=xed
+
+
+//--- Справка
+$ git help <команда>
+$ git <команда> --help
+$ man git-<команда>
+
+//--- Зайти в папку с проектом и инициализировать
+$ git init
+
+
+//--- начать отслеживать файлы
+starmark@starmark-small:~/VSCode_prj/ports/thrd$ git add *.cpp
+starmark@starmark-small:~/VSCode_prj/ports/thrd$ git add makefile
+starmark@starmark-small:~/VSCode_prj/ports/thrd$ git commit -m 'Test-project thrd'
+[master (корневой коммит) f1637b8] Test-project thrd
+ 2 files changed, 35 insertions(+)
+ create mode 100644 main.cpp
+ create mode 100644 makefile
+
+
+//--- Узнать статус 
+$ git status
+
+
+
+$ git remote add origin <REMOTE_URL>
+	# Sets the new remote
+$ git remote -v
+	# Verifies the new remote URL
+$ git push origin main
+	# Pushes the changes in your local repository up to the remote repository you specified as the origin
+
+
+//--- Как указать на шаблоны игнорируемых файлов
+//--- ZB: *.o  *.a  *~
+//----------------------------------------------
+$ cat .gitignore
+*.[oa]
+*~
+
+
+//--- Как клонировать в локальный компьютер ZB: в папку mylibgit
+$ git clone  https://github.com/libgit2/libgit2  mylibgit
+

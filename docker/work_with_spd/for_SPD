@@ -1,0 +1,51 @@
+Памятки по работе с проектом DPD_new:
+
+- Создание образа проекта (находясь в папке проекта) 
+
+docker build -t spd-project .
+
+
+
+- Экспортировать образ в файл:
+
+docker save -o spd-project.tar spd-project
+
+
+
+- Пересылка упакованного образа заказчику
+
+
+
+- Для запуска импортировать образ:
+
+docker load -i spd-project.tar
+
+
+
+- и запустить
+
+docker run -d -p 8080:8080 spd-project
+
+
+
+- Для остановки контейнера  (Контейнер получил имя happy_brattain)
+
+docker stop happy_brattain
+
+
+
+- Для перезапуска 
+
+docker start happy_brattain
+
+
+
+- Удалить контейнер можно так
+
+docker rm happy_brattain
+
+
+
+- Перезапустить контейнер из импортированного проекта так
+
+docker run -d -p 8080:8080 spd-project  

@@ -1,0 +1,96 @@
+<<< $ and # >>>
+$ - user command
+# - root command
+
+<<< work with console >>>
+gui_to_console:					<Ctrl>+<Alt>+<Fn> 		where 		n in [1, 2,..6]	
+switch_console					<Alt>+<Fn> 				where		n in [1, 2,..] 
+console_to_gui:					<Ctrl>+<Alt>+<F7>
+
+<<< work with poweroff, halt, reboot, shutdown>>>
+$ logout						exit
+$ exit							logout
+$ halt							halt work without power off
+$ powerfull						halt and power off
+
+# shutdown -h 20:30	[message]	shutdown all in 20:30
+# shutdown -h now				shutdown now
+# shutdown -r now				reboot now
+
+<<< work with man or info >>>
+$ man name_program				info about name_program
+$ man nam<Tab>					info if nam[e_program] kurtz 
+$ info man
+$ info ls
+$ info shutdown
+
+<<< work with aliases >>>
+$ alias la='ls -la'
+
+<<< clear console >>>
+$ clear
+
+<<< /etc/shells >>>
+$ cat /etc/shells
+> /bin/sh
+  /bin/bash
+  /usr/bin/bash
+  /bin/rbash
+  /usr/bin/rbash
+  /bin/dash
+  /usr/bin/dash
+  /usr/bin/screen
+  /usr/bin/tmux
+  
+$ chsh  
+
+[[[ work with common commands ]]]
+$ arch							get info architecture computer
+> X86_64
+
+$ banner Starmark
+>#####
+#     #   #####    ##    #####   #    #    ##    #####   #    #
+#           #     #  #   #    #  ##  ##   #  #   #    #  #   #
+ #####      #    #    #  #    #  # ## #  #    #  #    #  ####
+      #     #    ######  #####   #    #  ######  #####   #  #
+#     #     #    #    #  #   #   #    #  #    #  #   #   #   #
+ #####      #    #    #  #    #  #    #  #    #  #    #  #    #
+ 
+<<< change shell >>> 
+$ chsh -h						list all variants
+> Использование: chsh [параметры] [ПОЛЬЗОВАТЕЛЬ]
+
+Параметры:
+  -h, --help                    показать данное сообщение и закончить работу
+  -R, --root КАТ_CHROOT         каталог, в который выполняется chroot
+  -s, --shell ОБОЛОЧКА          новая регистрационная оболочка для учётной записи
+
+
+<<< cksum и md5sum >>>
+$ cksum file1.txt file2.txt
+
+$ md5sum file.txt
+
+<<< Date out >>>
+$ date --help
+$ date "+now %d-%m-%y"
+$ date "+Date is: %Y-%m-%d"
+$ date "+Date is: %F"
+$ date "+Date is: %F   Time: %T"
+
+<<< work with echo >>>
+$ man echo
+$ echo "Privet, I am Echo-command!"
+> Privet, I am Echo-command!
+
+<<< Environment variables >>>
+$ env EDITOR=nano edquota -u leon
+
+
+
+
+
+
+
+

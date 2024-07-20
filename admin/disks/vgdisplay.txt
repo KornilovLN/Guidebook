@@ -1,0 +1,63 @@
+  --- Volume group ---
+  VG Name               vg1
+  System ID             
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  2
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                1
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               976,43 GiB
+  PE Size               4,00 MiB
+  Total PE              249967
+  Alloc PE / Size       64000 / 250,00 GiB
+  Free  PE / Size       185967 / 726,43 GiB
+  VG UUID               B6kNXM-JC1T-FKoO-KJDv-eh35-xYkT-3W6Pzs
+   
+  --- Volume group ---
+  VG Name               vg2
+  System ID             
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  2
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                1
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <1,78 TiB
+  PE Size               4,00 MiB
+  Total PE              465364
+  Alloc PE / Size       64000 / 250,00 GiB
+  Free  PE / Size       401364 / 1,53 TiB
+  VG UUID               lnmUmR-4hcc-sesQ-30i8-3ZkI-2JLc-LFP0m4
+   
+  --- Volume group ---
+  VG Name               vgmint
+  System ID             
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  3
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                2
+  Open LV               2
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <931,01 GiB
+  PE Size               4,00 MiB
+  Total PE              238338
+  Alloc PE / Size       238338 / <931,01 GiB
+  Free  PE / Size       0 / 0   
+  VG UUID               rvah6P-tSEP-THT7-lhNy-r3pS-Hs3c-532Pxx
+   

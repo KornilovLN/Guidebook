@@ -1,0 +1,58 @@
+#--- Сборка образа согласно Dockerfile ---------------------------------
+#--- Откройте терминал и перейдите в каталог, содержащий Dockerfile
+#--- (/home/leon/work/docker/SPD),
+#--- затем выполните команду:
+
+docker build -t spd-project .
+
+
+#--- Запустите контейнер
+#--- После успешного создания образа, запустите контейнер:
+
+docker run -d -p 8080:8080 spd-project
+
+
+#--- Экспортируйте образ в файл:
+
+docker save -o spd-project.tar spd-project
+
+
+#-----------------------------------------------------------------------
+
+#--- Для запуска импортировать образ:
+
+docker load -i spd-project.tar
+
+#--- и запустить
+
+docker run -d -p 8080:8080 spd-project
+
+#--- Для остановки контейнера  (Контейнер получил имя happy_brattain)
+
+docker stop happy_brattain
+
+#--- Для перезапуска 
+
+docker start happy_brattain
+
+#--- Посмотреть, есть ли запущенные контейнеры
+
+docker ps
+
+# Ответ:
+CONTAINER ID   IMAGE         COMMAND                CREATED              STATUS              PORTS                                       NAMES
+405a750aee62   spd-project   "http-server -c-1 ."   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   happy_brattain
+
+# контейнер может быть адресован так   happy_brattain
+# или так                              405a750aee62    
+
+#--- Удалить контейнер можно так
+
+docker rm happy_brattain
+
+#--- Перезапустить контейнер из импортированного проекта так
+
+docker run -d -p 8080:8080 spd-project  
+
+
+
