@@ -6,17 +6,17 @@ _Включает генератор данных, базу данных и по
 
 1. **Создание Docker-сетей**
 
-Создайте две пользовательские Docker-сети для изолирования взаимодействия контейнеров:
+    Создайте две пользовательские Docker-сети для изолирования взаимодействия контейнеров:
 ```
 sh
 
 docker network create net_gen_db
 docker network create net_db_user
-``
+```
 
 2. **Создание контейнера MongoDB**
 
-Запустите контейнер MongoDB и подключите его к обеим сетям:
+    Запустите контейнер MongoDB и подключите его к обеим сетям:
 ```
 sh
 
@@ -25,7 +25,7 @@ docker run --name my_mongo --network net_gen_db --network-alias mongo_gen --netw
 
 3. **Создание генератора данных**
 
-Создайте Dockerfile для генератора данных:
+    Создайте Dockerfile для генератора данных:
 ```
 Dockerfile
 
@@ -81,7 +81,7 @@ docker run --name data_generator --network net_gen_db data_generator
 
 6. **Создание потребителя данных**
 
-Создайте Dockerfile для потребителя данных:
+    Создайте Dockerfile для потребителя данных:
 ```
 Dockerfile
 
