@@ -43,11 +43,12 @@ git clone ssh://username@hostname:/path/to/repo.git
     GitLab CE — это полноценная платформа для управления репозиториями Git
                 с множеством функций, аналогичных GitHub и GitLab.
 
-    **1. Установка GitLab CE:**
+**1. Установка GitLab CE:**
 
     Следуйте инструкциям для вашей операционной системы на официальном сайте GitLab.
 
-    **2. Для Ubuntu/Debian:**
+**2. Для Ubuntu/Debian:**
+
 ```
 sudo apt-get update
 sudo apt-get install -y curl openssh-server ca-certificates
@@ -56,7 +57,7 @@ curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.de
 sudo EXTERNAL_URL="http://gitlab.example.com" apt-get install gitlab-ce
 ```
     
-    **3. Настройка GitLab:**
+**3. Настройка GitLab:**
 
     После установки откройте браузер и перейдите по адресу, который вы указали в EXTERNAL_URL 
     (например, http://gitlab.example.com).
@@ -66,18 +67,20 @@ sudo EXTERNAL_URL="http://gitlab.example.com" apt-get install gitlab-ce
 
     Gitea — легковесная, самообслуживаемая платформа для размещения Git-репозиториев.
 
-    **1. Установка Gitea:**
+**1. Установка Gitea:**
 
     Следуйте инструкциям на официальном сайте Gitea.
 
-    **2. Для Ubuntu/Debian:**
+**2. Для Ubuntu/Debian:**
+
 ```
 wget -O gitea https://dl.gitea.io/gitea/1.15.6/gitea-1.15.6-linux-amd64
 chmod +x gitea
 sudo mv gitea /usr/local/bin/
 ```
 
-    **3. Создание пользователя и директории для Gitea:**
+**3. Создание пользователя и директории для Gitea:**
+
 ```
 sudo adduser --system --shell /bin/bash --gecos 'Git Version Control' --group --disabled-password --home /home/git git
 sudo mkdir -p /var/lib/gitea/{custom,data,log}
@@ -88,14 +91,16 @@ sudo chown root:git /etc/gitea
 sudo chmod 770 /etc/gitea
 ```
 
-    **4. Настройка системного сервиса:**
+**4. Настройка системного сервиса:**
 
     Создайте файл сервиса для Gitea:
+
 ```
 sudo nano /etc/systemd/system/gitea.service
 ```
 
-    **5. Добавьте следующее содержимое:**
+**5. Добавьте следующее содержимое:**
+
 ```
 ini
 
@@ -123,13 +128,15 @@ Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea
 WantedBy=multi-user.target
 ```
 
-    **6. Запустите и активируйте сервис:**
+**6. Запустите и активируйте сервис:**
+
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable gitea
 sudo systemctl start gitea
 ```
-    **7. Настройка Gitea через веб-интерфейс:**
+
+**7. Настройка Gitea через веб-интерфейс:**
 
     Откройте браузер и перейдите по адресу вашего сервера (например, http://hostname:3000).
     Следуйте инструкциям для завершения настройки.
