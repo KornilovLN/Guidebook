@@ -133,4 +133,123 @@ docker load < /path/to/destination/myapp.tar
 
 docker run -d -v /path/to/destination/volumes:/app/data myapp:latest
 
+#---------------------------------------------------------------------------
+#--- 
+#---------------------------------------------------------------------------
+
+### Чтобы увидеть сайт с вашего хоста, нужно настроить проброс портов через SSH:
+
+    1. На вашем локальном компьютере выполните команду:
+```
+ssh -L 8089:localhost:8089 starmark@gitlab.ivl.ua 
+```
+
+    что позволит зайти в удаленный сервер так, чтобы связать локалхост порты
+
+    2. Измените запуск контейнера, чтобы он слушал на всех интерфейсах:
+```
+Замените 
+    -p 8089:80 на
+    -p 0.0.0.0:8089:80
+```
+
+    3. Теперь вы сможете открыть в браузере
+```
+http://localhost:8089
+```
+    и увидеть сайт, запущенный на удаленном сервере.
+
+    4. Если нужно изменить порт, просто замените 8089 на желаемый порт в обеих командах.
+
+    5. Для облегчения работ создайте скрипт и пусть он будет на удаленном сервере
+```
+#!/bin/bash
+
+# run_cont.sh  
+# Сделать его исполняемым и отправить на сервер вместе с проектом
+# Проект разархивировать и загрузить
+# Потом запустить скрипт
+# А уже на хосте запустить браузер как: localhost:8089
+# Страница запущенная на сервере будет видна на хосте 
+
+IMAGENAME="my-flask-img:latest"
+CONTAINERNAME="my-flask-cont"
+VOLUMENAME="ekatra_flask_data"
+VOLUMEPATH="/home/leon/work/docker/ekatra_flask/"
+APPPATH="/app"
+DATAPATH="/data"
+
+#PORTHOST=8089
+PORTHOST=0.0.0.0:8089
+
+PORTDOCK=80
+
+# Если был запущен, то надо остановить перед перегрузкой 
+docker stop $CONTAINERNAME
+
+sleep 2
+
+# Создаем том для контекста, создаваемого приложением
+docker volume create $VOLUMENAME
+
+
+# После останова самоуничтожится
+docker run  --rm \
+            --name $CONTAINERNAME \
+            -p $PORTHOST:$PORTDOCK \
+            # -v $VOLUMEPATH:$APPPATH \
+            -v $VOLUMENAME:$DATAPATH \
+            $IMAGENAME
+```
+
+    6. При этом Dockerfile проекта такой:
+```
+#---------------------------------------------------------------------
+# образ Docker с тегом my-image, содержащий базовый python:3.12-slim
+# Nginx, Git и Midnight Commander.
+# Файлы приложения Flask в директории app/
+#---------------------------------------------------------------------
+# docker build -t my-flask-img .        #--- сборка my-flask-img
+# docker run -p 8089:80 my-flask-img    #--- запустить контейнер
+# переделать следующую команду
+# docker run --rm --name my-flask-cont -p 8089:80 -v /home/leon/work/docker/ekatra_flask/:/app my-flask-img
+# на команду запуска контейнера с пробросом локалхост портов так:
+# docker run --rm --name my-flask-cont -p 0.0.0.0:8089:80 -v /home/leon/work/docker/ekatra_flask/:/app my-flask-img
+#---------------------------------------------------------------------
+# Используем базовый образ Python 3.12
+FROM python:3.12-slim
+
+# Обновляем список пакетов и устанавливаем необходимые пакеты
+RUN apt-get update && \
+    apt-get install -y nginx docker.io git mc && \
+    rm -rf /var/lib/apt/lists/*
+
+# Копируем файл requirements.txt
+COPY requirements.txt /app/requirements.txt
+
+# Обновляем pip, setuptools и wheel
+RUN pip install --upgrade pip setuptools wheel
+
+# Устанавливаем зависимости Python через pip
+RUN pip install -r /app/requirements.txt
+
+# Копируем файлы приложения в контейнер
+# Если заглушить, то будут использоваться из подключенного тома 
+# какой надо будет указать в скрипте запуска контейнера
+# Например так: -v ekatra_flask_data:/data
+COPY . /app/  
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем конфигурационный файл Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Открываем порт для Nginx
+EXPOSE 80
+
+# Запускаем Nginx и Flask приложение при старте контейнера
+CMD ["sh", "-c", "nginx && gunicorn -b 0.0.0.0:5000 app:app"]
+```
+
 
