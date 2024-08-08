@@ -177,7 +177,7 @@ DELETE FROM temperature WHERE time < now() - 30d;
 ```
     PostgreSQL/MySQL/SQLite
         SQL Tutorial                        https://www.sqltutorial.org/
-        PostgreSQL Documentation            https://www.postgresql.org/docs/
+        https://www.postgresql.org/docs/    https://www.postgresql.org/docs/
         MySQL Documentation                 https://dev.mysql.com/doc/
         SQLite Documentation                https://www.sqlite.org/docs.html
 
