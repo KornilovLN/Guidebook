@@ -196,17 +196,17 @@ r.db('test').table('users').get('document_id').delete().run(conn);
 ```
     Redis:
         Redis Documentation
-        Redis Quick Start
+        Redis Quick Start           https://redis.io/docs/latest/develop/get-started/
 
     MongoDB:
-        MongoDB Documentation
-        MongoDB Quick Start
+        MongoDB Documentation       https://www.mongodb.com/docs/
+        MongoDB Quick Start         https://www.mongodb.com/docs/manual/tutorial/getting-started/
 
     CouchDB:
-        CouchDB Documentation
-        CouchDB Quick Start
+        CouchDB Documentation       https://couchdb.apache.org/
+        CouchDB Quick Start         https://www.tutorialspoint.com/couchdb/couchdb_quick_guide.htm
 
     RethinkDB:
-        RethinkDB Documentation
-        RethinkDB Quick Start
+        RethinkDB Documentation     https://rethinkdb.com/docs
+        RethinkDB Quick Start       https://rethinkdb.com/docs/quickstart
 ```
