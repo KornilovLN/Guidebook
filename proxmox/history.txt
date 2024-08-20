@@ -1,0 +1,24 @@
+   65  chown root:root ./wg0.conf 
+   67  wg show
+   68  wg --help
+   69  wg setconf wg0.conf
+   70  wg setconf wg0 wg0.conf
+   71  wg addconf wg0 wg0.conf
+
+   72  wg genkey | tee privatekey | wg pubkey | tee publickey
+   74  cat ./publickey
+   75  cat ./privatekey
+   76  wg-quick up wg0
+   77  ip a
+   78  wg show
+   79  ping 192.168.88.15
+   80  wg-quick down wg0
+   81  cat .privatekey
+   82  cat ./privatekey
+   83  wg-quick up  wg0
+   84  wg show
+   85  ping 192.168.88.15
+   86  history
+   87  history>~/history.txt
+   88  history> ~/virt/history.txt
+   89  history> /home/leon/virt/history.txt

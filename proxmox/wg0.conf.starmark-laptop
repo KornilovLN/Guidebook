@@ -1,0 +1,16 @@
+[Interface]
+# Private Key of the WireGuard Client
+PrivateKey = SM8gWnMrWIAc0uDYLL+OHURrTOiOh1pfC/t54HgC2m8=
+# VPN IP Address of the Client
+Address = 10.10.10.202/24
+
+[Peer]
+# Public Key of the WireGuard VPN Server
+PublicKey = C7AQPHCyKSdaIPCB189RFWp4xyatEXp2vfHWQLmrfQw=
+
+# White IP Address & port of the WireGuard server
+Endpoint = 178.151.114.211:13231
+
+# Allowed IP Addresses
+AllowedIPs = 10.10.10.1/32, 192.168.88.0/24
+
