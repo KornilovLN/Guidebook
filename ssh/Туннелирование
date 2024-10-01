@@ -1,0 +1,7 @@
+### Для связи localhost машины оператора с localhost удаленной машины
+```
+ssh -L 8080:localhost:8080 starmark@192.168.88.103
+ssh -L 8080:localhost:8080 starmark@192.168.88.104
+ssh -L 8080:localhost:8080 starmark@192.168.88.105
+ssh -L 8080:localhost:8080 starmark@gitlab.ivl.ua
+```

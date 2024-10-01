@@ -161,8 +161,8 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 
 Docker применяется для управления отдельными контейнерами (сервисами), из которых состоит приложение. Docker Compose используется для одновременного управления несколькими контейнерами, входящими в состав приложения. Этот инструмент предлагает те же возможности, что и Docker, но позволяет работать с более сложными приложениями.
 ```
-$ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" \
-> -o /usr/local/bin/docker-compose
+#--- Более новая версия 
+$ sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
 $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose  
 ```
